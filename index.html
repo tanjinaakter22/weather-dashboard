@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#132a43">
+  <title>Atmos — Live Weather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body class="weather-sunny">
+  <div class="scene" aria-hidden="true">
+    <div class="sun-glow"></div>
+    <div class="cloud cloud-one"></div><div class="cloud cloud-two"></div>
+    <div class="rain" id="rain"></div>
+    <div class="stars"></div>
+  </div>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Atmos home"><span class="brand-mark">✳</span><span>atmos</span></a>
+      <div class="topbar-tools">
+        <button class="location-button" id="locationButton" type="button"><span aria-hidden="true">⌖</span> <span class="location-label">Use my location</span></button>
+        <div class="unit-switch" role="group" aria-label="Temperature unit">
+          <button class="unit-button active" id="celsiusButton" type="button" aria-pressed="true">°C</button>
+          <button class="unit-button" id="fahrenheitButton" type="button" aria-pressed="false">°F</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">YOUR WEATHER, IN A MOMENT</p>
+      <h1>Find your <span>forecast.</span></h1>
+      <p class="hero-copy">A little clarity for wherever the day takes you.</p>
+      <div class="search-wrap">
+        <form class="search-form" id="searchForm" role="search">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <label class="sr-only" for="cityInput">Search for a city</label>
+          <input id="cityInput" type="search" placeholder="Search any city…" autocomplete="off" required role="combobox" aria-autocomplete="list" aria-controls="citySuggestions" aria-expanded="false">
+          <button class="search-button" type="submit">Search <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="suggestions" id="citySuggestions" role="listbox" aria-label="Matching cities" hidden></div>
+      </div>
+      <p class="status-message" id="statusMessage" aria-live="polite"></p>
+    </section>
+
+    <div class="dashboard" id="dashboard" aria-live="polite" aria-busy="false">
+      <section class="current-card glass-card" aria-label="Current weather">
+        <div class="current-topline">
+          <div><p class="eyebrow">CURRENT WEATHER</p><h2 id="cityName">Dhaka</h2><p class="date-line" id="currentDate">—</p></div>
+          <div class="current-icon" id="currentIcon" aria-hidden="true">☀️</div>
+        </div>
+        <div class="temperature-row"><span class="current-temp" id="currentTemp">—</span><span class="temp-unit" id="currentUnit">°C</span></div>
+        <p class="weather-description" id="weatherDescription">Loading your forecast…</p>
+        <div class="current-divider"></div>
+        <div class="metrics">
+          <div class="metric"><span class="metric-icon" aria-hidden="true">🌡</span><div><span class="metric-label">Feels like</span><strong id="feelsLike">—</strong></div></div>
+          <div class="metric"><span class="metric-icon" aria-hidden="true">💧</span><div><span class="metric-label">Humidity</span><strong id="humidity">—</strong></div></div>
+          <div class="metric"><span class="metric-icon" aria-hidden="true">〰</span><div><span class="metric-label">Wind</span><strong id="windSpeed">—</strong></div></div>
+        </div>
+      </section>
+
+      <section class="forecast-card glass-card" aria-labelledby="hourlyHeading">
+        <div class="section-heading"><div><p class="eyebrow">PLAN THE NEXT HOURS</p><h2 id="hourlyHeading">Hourly forecast</h2></div><span class="heading-icon" aria-hidden="true">◷</span></div>
+        <div class="hourly-list" id="hourlyForecast" tabindex="0" aria-label="Next 24 hours, scroll horizontally"></div>
+      </section>
+
+      <section class="forecast-card glass-card daily-card" aria-labelledby="dailyHeading">
+        <div class="section-heading"><div><p class="eyebrow">AHEAD THIS WEEK</p><h2 id="dailyHeading">7-day forecast</h2></div><span class="heading-icon" aria-hidden="true">▤</span></div>
+        <div class="daily-list" id="dailyForecast"></div>
+      </section>
+    </div>
+    <footer class="footer"><span>Made for the moments between plans.</span><span>Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a></span></footer>
+  </main>
+  <div class="loading-overlay" id="loadingOverlay" hidden><div class="spinner" role="status" aria-label="Loading weather"></div><span>Checking the skies…</span></div>
+</body>
+</html>
